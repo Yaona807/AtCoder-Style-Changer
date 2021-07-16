@@ -27,6 +27,65 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+function rankingTableUpdate() {
+  $("#standings-panel-heading.panel-heading").css({
+    color: "#c3c3c3",
+    background: "black",
+  });
+
+  $(".btn-text").css({
+    color: "#c3c3c3",
+  });
+
+  $("tr").css({
+    color: "#c3c3c3",
+    background: "black",
+  });
+
+  $("tr.info td").css({
+    color: "#c3c3c3",
+    background: "black",
+  });
+
+  $(".standings-score").css({
+    color: "#4aabff",
+  });
+
+  $(".pagination.pagination-sm.mt-0.mb-1 a").css({
+    color: "#c3c3c3",
+    background: "black",
+    "border-color": "",
+  });
+
+  $("li.active a").css({
+    "border-color": "#d10000",
+  });
+
+  userColor();
+}
+
+function userColor() {
+  $(".user-blue").css({
+    color: "#0095ff",
+  });
+
+  $(".user-unrated").css({
+    color: "white",
+  });
+
+  $(".user-brown").css({
+    color: " #b16c28",
+  });
+
+  $(".user-green").css({
+    color: " #00ce00",
+  });
+
+  $(".user-gray").css({
+    color: "#a9a9a9",
+  });
+}
+
 (async function () {
   //全体共通
   $("li.active a").css({
@@ -40,6 +99,12 @@ function sleep(ms) {
   $("#fixed-server-timer").css({
     color: "black",
   });
+  $("head").append(
+    "<style type='text/css'> #header .header-page li.is-active a {color: #c3c3c3 !important; } </style>"
+  );
+  $("head").append(
+    "<style type='text/css'> #header .header-lang li a:hover {color: #c3c3c3 !important; } </style>"
+  );
 
   //ユーザーカラー
   userColor();
@@ -67,7 +132,7 @@ function sleep(ms) {
   });
 
   $(".btn.btn-default.active").css({
-    "border-color": "#d10000"
+    "border-color": "#d10000",
   });
 
   $("ul").css({
@@ -78,8 +143,6 @@ function sleep(ms) {
   $("head").append(
     "<style type='text/css'> .new-is-active {color: '#c3c3c3'; } </style>"
   );
-  $("li.is-active").addClass("new-is-active");
-  $("li.is-active").removeClass("is-active");
 
   $(".glyphicon.glyphicon-resize-full").css({
     color: "#c3c3c3",
@@ -201,70 +264,72 @@ function sleep(ms) {
     background: "black",
   });
 
-    // Home
-    $("div.f-flex.f-flex_mg5.f-flex_mg0_s.f-flex_mb5_s div.f-flex4.f-flex12_s").css({
-      border:"solid 1px"
-    });
+  // Home
+  $(
+    "div.f-flex.f-flex_mg5.f-flex_mg0_s.f-flex_mb5_s div.f-flex4.f-flex12_s"
+  ).css({
+    border: "solid 1px",
+  });
 
-    $("head").append(
-      "<style type='text/css'>#header .header-page li a:hover{color:#c3c3c3 !important;}</style>"
-    );
+  $("head").append(
+    "<style type='text/css'>#header .header-page li a:hover{color:#c3c3c3 !important;}</style>"
+  );
 
-    $("head").append(
-      "<style type='text/css'>#header .header-page li a:before{content: '';width: 0;height: 2px;position: absolute;left: 0;right: 0;bottom: 0;background-color: white !important;-webkit-transition: width .4s;transition: width .4s;}</style>"
-    );
+  $("head").append(
+    "<style type='text/css'>#header .header-page li a:before{content: '';width: 0;height: 2px;position: absolute;left: 0;right: 0;bottom: 0;background-color: white !important;-webkit-transition: width .4s;transition: width .4s;}</style>"
+  );
 
-    $(".m-box_inner").css({
-      "background-color": "black",
-    });
-  
-    $(".m-box-news_post::before").css({
-      "background-color": "black"
-    });
-  
-    $("a.a-btn_bg.small").css({
-      color: "#c3c3c3",
-      "background-color": "black"
-    });
+  $(".m-box_inner").css({
+    "background-color": "black",
+  });
 
-    $("#keyvisual").css({
-      color: "#c3c3c3",
-      "background-color": "black",
-      "background-blend-mode": "darken"
-    });
-    $("head").append(
-      "<style type='text/css'>#keyvisual .keyvisual-inner:before{background-color:black; content: ''; display: block;position: absolute;top: 0;width: 18px;height: 400px;pointer-events: none;}</style>"
-      );
+  $(".m-box-news_post::before").css({
+    "background-color": "black",
+  });
 
-      $("head").append(
-      "<style type='text/css'>.m-box-news_post:before{content: '';position: absolute;left: 0;bottom: 0;width: 100%;height: 100px;background: -webkit-gradient(linear, left bottom, left top, color-stop(50%, #fff), to(rgba(255,255,255,0)));background: linear-gradient(0deg, #000 50%, rgba(255,255,255,0) 100%);}</style>"
-      );
-    
-      $(".status").css({
-        "background-color": "#037abf",
-      });
+  $("a.a-btn_bg.small").css({
+    color: "#c3c3c3",
+    "background-color": "black",
+  });
 
-      $(".status.status-gray").css({
-        "background-color": "#717171",
-      });
+  $("#keyvisual").css({
+    color: "#c3c3c3",
+    "background-color": "black",
+    "background-blend-mode": "darken",
+  });
+  $("head").append(
+    "<style type='text/css'>#keyvisual .keyvisual-inner:before{background-color:black; content: ''; display: block;position: absolute;top: 0;width: 18px;height: 400px;pointer-events: none;}</style>"
+  );
 
-      $(".a-btn_bg").css({
-        border:"solid 1px"
-      });
+  $("head").append(
+    "<style type='text/css'>.m-box-news_post:before{content: '';position: absolute;left: 0;bottom: 0;width: 100%;height: 100px;background: -webkit-gradient(linear, left bottom, left top, color-stop(50%, #fff), to(rgba(255,255,255,0)));background: linear-gradient(0deg, #000 50%, rgba(255,255,255,0) 100%);}</style>"
+  );
 
-      //PAST
-      $(".center-block").css({
-        "background-color": "#d6d6d6",
-      });
+  $(".status").css({
+    "background-color": "#037abf",
+  });
 
-      //Jobs
-      $(".f-flex3").css({
-        border:"solid 1px"
-      });
+  $(".status.status-gray").css({
+    "background-color": "#717171",
+  });
 
-      $(".m-list-job_company").css({
-        color: "#c3c3c3",
-      });
+  $(".a-btn_bg").css({
+    border: "solid 1px",
+  });
+
+  //PAST
+  $(".center-block").css({
+    "background-color": "#d6d6d6",
+  });
+
+  //Jobs
+  $(".f-flex3").css({
+    border: "solid 1px",
+  });
+
+  $(".m-list-job_company").css({
+    color: "#c3c3c3",
+  });
 
   //順位表
   await sleep(1 * 4000);
@@ -287,62 +352,3 @@ function sleep(ms) {
     attributeFilter: ["class"],
   });
 })();
-
-function rankingTableUpdate() {
-  $("#standings-panel-heading.panel-heading").css({
-    color: "#c3c3c3",
-    background: "black",
-  });
-
-  $(".btn-text").css({
-    color: "#c3c3c3",
-  });
-
-  $("tr").css({
-    color: "#c3c3c3",
-    background: "black",
-  });
-
-  $("tr.info td").css({
-    color: "#c3c3c3",
-    background: "black",
-  });
-
-  $(".standings-score").css({
-    color: "#4aabff",
-  });
-
-  $(".pagination.pagination-sm.mt-0.mb-1 a").css({
-    color: "#c3c3c3",
-    background: "black",
-    "border-color": "",
-  });
-
-  $("li.active a").css({
-    "border-color": "#d10000",
-  });
-
-  userColor();
-}
-
-function userColor() {
-  $(".user-blue").css({
-    color: "#0095ff",
-  });
-
-  $(".user-unrated").css({
-    color: "white",
-  });
-
-  $(".user-brown").css({
-    color: " #b16c28",
-  });
-
-  $(".user-green").css({
-    color: " #00ce00",
-  });
-
-  $(".user-gray").css({
-    color: "#a9a9a9",
-  });
-}
