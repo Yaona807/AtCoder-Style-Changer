@@ -28,14 +28,6 @@ function sleep(ms) {
 }
 
 (async function () {
-  // タイマー
-  $("#fixed-server-timer").css({
-    color: "black",
-  });
-
-  //ユーザーカラー
-  userColor();
-
   //全体共通
   $("li.active a").css({
     "border-color": "#d10000",
@@ -44,6 +36,13 @@ function sleep(ms) {
   $(".btn-primary").css({
     "border-color": "#d10000",
   });
+  // タイマー
+  $("#fixed-server-timer").css({
+    color: "black",
+  });
+
+  //ユーザーカラー
+  userColor();
 
   // ユーザページ
   // https://atcoder.jp/users/{user_name}
@@ -65,6 +64,10 @@ function sleep(ms) {
   $("button").css({
     color: "#c3c3c3",
     "background-color": "black",
+  });
+
+  $(".btn.btn-default.active").css({
+    "border-color": "#d10000"
   });
 
   $("ul").css({
@@ -170,6 +173,7 @@ function sleep(ms) {
   $("#main-div").css({
     background: "black",
   });
+
   //  問題ページ
   $("pre").css({
     color: "#c3c3c3",
@@ -196,6 +200,71 @@ function sleep(ms) {
     color: "#c3c3c3",
     background: "black",
   });
+
+    // Home
+    $("div.f-flex.f-flex_mg5.f-flex_mg0_s.f-flex_mb5_s div.f-flex4.f-flex12_s").css({
+      border:"solid 1px"
+    });
+
+    $("head").append(
+      "<style type='text/css'>#header .header-page li a:hover{color:#c3c3c3 !important;}</style>"
+    );
+
+    $("head").append(
+      "<style type='text/css'>#header .header-page li a:before{content: '';width: 0;height: 2px;position: absolute;left: 0;right: 0;bottom: 0;background-color: white !important;-webkit-transition: width .4s;transition: width .4s;}</style>"
+    );
+
+    $(".m-box_inner").css({
+      "background-color": "black",
+    });
+  
+    $(".m-box-news_post::before").css({
+      "background-color": "black"
+    });
+  
+    $("a.a-btn_bg.small").css({
+      color: "#c3c3c3",
+      "background-color": "black"
+    });
+
+    $("#keyvisual").css({
+      color: "#c3c3c3",
+      "background-color": "black",
+      "background-blend-mode": "darken"
+    });
+    $("head").append(
+      "<style type='text/css'>#keyvisual .keyvisual-inner:before{background-color:black; content: ''; display: block;position: absolute;top: 0;width: 18px;height: 400px;pointer-events: none;}</style>"
+      );
+
+      $("head").append(
+      "<style type='text/css'>.m-box-news_post:before{content: '';position: absolute;left: 0;bottom: 0;width: 100%;height: 100px;background: -webkit-gradient(linear, left bottom, left top, color-stop(50%, #fff), to(rgba(255,255,255,0)));background: linear-gradient(0deg, #000 50%, rgba(255,255,255,0) 100%);}</style>"
+      );
+    
+      $(".status").css({
+        "background-color": "#037abf",
+      });
+
+      $(".status.status-gray").css({
+        "background-color": "#717171",
+      });
+
+      $(".a-btn_bg").css({
+        border:"solid 1px"
+      });
+
+      //PAST
+      $(".center-block").css({
+        "background-color": "#d6d6d6",
+      });
+
+      //Jobs
+      $(".f-flex3").css({
+        border:"solid 1px"
+      });
+
+      $(".m-list-job_company").css({
+        color: "#c3c3c3",
+      });
 
   //順位表
   await sleep(1 * 4000);
@@ -263,5 +332,17 @@ function userColor() {
 
   $(".user-unrated").css({
     color: "white",
+  });
+
+  $(".user-brown").css({
+    color: " #b16c28",
+  });
+
+  $(".user-green").css({
+    color: " #00ce00",
+  });
+
+  $(".user-gray").css({
+    color: "#a9a9a9",
   });
 }
