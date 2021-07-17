@@ -277,6 +277,15 @@
 		border: "solid 1px",
 	});
 
+	$(".a-btn_arrow").css({
+		color: "#c3c3c3",
+		"background-color": "black",
+	});
+
+	$(".a-btn_arrow").css({
+		"cssText":$(".a-btn_arrow").attr("style") + "color: #c3c3c3 !important;"
+	});
+
 	//PAST
 	$(".center-block").css({
 		"background-color": "#d6d6d6",
