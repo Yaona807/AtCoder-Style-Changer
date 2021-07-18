@@ -10,9 +10,176 @@
 // ==/UserScript==
 
 (function () {
+
+	// 順位表などの設定
+	function rankingTableUpdate() {
+		$("#btn-reset").css({
+			color: "#c3c3c3",
+			background: "black",
+		});
+
+		$("#input-affiliation").css({
+			color: "#c3c3c3",
+			background: "black",
+		});
+
+		$("#input-user").css("cssText", "color: #c3c3c3; background: black");
+
+		$("#select2-standings-select-country-container").css({
+			color: "#c3c3c3",
+			background: "black",
+			border: "white 1px solid"
+		});
+
+		$("#refresh, #auto-refresh").css({
+			color: "#c3c3c3",
+			background: "black",
+		});
+
+		$("#standings-panel-heading.panel-heading").css({
+			color: "#c3c3c3",
+			background: "black",
+		});
+
+		$(".btn-text").css({
+			color: "#c3c3c3",
+		});
+
+		$("tr").css({
+			color: "#c3c3c3",
+			background: "black",
+		});
+
+		$("tr.info td").css({
+			color: "#c3c3c3",
+			background: "black",
+		});
+
+		$(".standings-score").css({
+			color: "#4aabff",
+		});
+
+		$(".pagination.pagination-sm.mt-0.mb-1 a").css({
+			color: "#c3c3c3",
+			background: "black",
+			"border-color": "",
+		});
+
+		$("li.active a").css({
+			"border-color": "#d10000",
+		});
+
+		$("td.standings-result.standings-perf").css({
+			color: "#c3c3c3",
+			background: "black",
+		});
+
+		$("td.standings-result.standings-rate").css({
+			color: "#c3c3c3",
+			background: "black",
+		});
+
+		$(".standings-ac").css({
+			color: "#00e152",
+		});
+
+		$(".standings-result p").css({
+			color: "#d8d8d8",
+		});
+
+		$(".standings-statistics td p,.standings-fa td p").css({
+			color: "#d8d8d8",
+		});
+
+		$(".sort-th.no-break a").css({
+			color: "#d6d6d6",
+		});
+
+	}
+
+	// userのカラー設定
+	function userColor() {
+		$("head").append(
+			"<style type='text/css'> .user-blue {color: #0095ff; } </style>"
+		);
+
+		$("head").append(
+			"<style type='text/css'> .user-unrated {color: white; } </style>"
+		);
+
+		$("head").append(
+			"<style type='text/css'> .user-brown {color: #b16c28; } </style>"
+		);
+
+		$("head").append(
+			"<style type='text/css'> .user-green {color: #00ce00; } </style>"
+		);
+
+		$("head").append(
+			"<style type='text/css'> .user-gray {color: #a9a9a9; } </style>"
+		);
+
+		$("head").append(
+			"<style type='text/css'> .user-yellow {color: #dede01; } </style>"
+		);
+
+		$("head").append(
+			"<style type='text/css'> .user-cyan {color: #00f1f1; } </style>"
+		);
+	}
+
+	function loadObservation() {
+		const loadElem = document.getElementById("vue-standings").getElementsByClassName("loading-show")[0];
+		const loadOptions = { attributes: true };
+		const loadObserver = new MutationObserver(() => {
+			if (!!document.getElementById("standings-tbody")) {
+				rankingTableUpdate();
+				standObservation();
+				refreshObservation()
+			};
+		});
+		loadObserver.observe(loadElem, loadOptions);
+	}
+
+	function standObservation() {
+		const standElem = document.getElementById("standings-tbody");
+		const standElemOption = {
+			childList: true,
+			attributes: true,
+		};
+		if (standElem) {
+			const standObserver = new MutationObserver(rankingTableUpdate);
+			standObserver.observe(standElem, standElemOption);
+		}
+	}
+
+	function refreshObservation() {
+		const refreshElem = document.getElementById("refresh");
+		const refreshElemOptions = {
+			attributes: true,
+			attributeFilter: ["class"],
+		};
+		if (refreshElem) {
+			const refreshObserver = new MutationObserver((mutationRecord) => {
+				const isDisabled = mutationRecord[0].target.classList.contains("disabled");
+				if (isDisabled) {
+					rankingTableUpdate();
+				}
+			}).observe(refreshElem, refreshElemOptions);
+		};
+	}
+	function resultObservation() {
+		const resultElem = document.getElementsByClassName("pagination pagination-sm mt-0 mb-1")[0]
+		const resultOptions = {
+			childList: true,
+			attributes: true
+		};
+		const resultObserver = new MutationObserver(rankingTableUpdate).observe(resultElem, resultOptions);
+	}
 	//全体共通
 	$("li.active a").css({
 		"border-color": "#d10000",
+		"border": " #d10000 solid 1px"
 	});
 
 	$(".btn-primary").css({
@@ -45,11 +212,6 @@
 		"background-color": "black",
 	});
 
-	$("a").css({
-		color: "#c3c3c3",
-		"background-color": "transparent",
-	});
-
 	$("button").css({
 		color: "#c3c3c3",
 		"background-color": "black",
@@ -68,8 +230,13 @@
 		"<style type='text/css'> .new-is-active {color: '#c3c3c3'; } </style>"
 	);
 
-	$(".glyphicon.glyphicon-resize-full").css({
+	$(".glyphicon.glyphicon-resize-full, .glyphicon.glyphicon-search.black").css({
 		color: "#c3c3c3",
+	});
+
+	$(".form-control.input-sm").css({
+		color: "#c3c3c3",
+		"background-color": "black",
 	});
 
 	$(".header-inner").css({
@@ -104,6 +271,11 @@
 	$("#rankStatus").css({
 		"background-color": "rgb(209 209 209)",
 		"margin-left": "2%",
+	});
+
+	$("a").css({
+		color: "#c3c3c3",
+		"background-color": "transparent",
 	});
 
 	// コンテスト成績証
@@ -205,13 +377,13 @@
 
 	// 文字色
 	$("head").append("<style type='text/css'>.cm-s-default .cm-builtin{color: #bb98ff}</style>");
-	
+
 	$("head").append("<style type='text/css'>.cm-s-default .cm-keyword{color: #ed72ff}</style>");
 
 	$("head").append("<style type='text/css'>.cm-s-default .cm-def{color: #23c2ff}</style>");
-	
+
 	$("head").append("<style type='text/css'>.cm-s-default .cm-string{color: #ff9a5f}</style>");
-	
+
 	$("head").append("<style type='text/css'>.cm-s-default .cm-number{color: #11cb81}</style>");
 
 	$("head").append("<style type='text/css'>.cm-s-default .cm-comment{color: #9e9e9e}</style>");
@@ -222,8 +394,8 @@
 	});
 
 	$("head").append("<style type='text/css'>div.CodeMirror-linenumber.CodeMirror-gutter-elt{color: white}</style>");
-	
-	$(".CodeMirror").css("color","white");
+
+	$(".CodeMirror").css("color", "white");
 
 	//提出結果
 	$(".panel-heading").css({
@@ -233,6 +405,12 @@
 
 	$(".label-warning").css({
 		background: "#d58617",
+	});
+
+	$(".btn.btn-link.btn-xs").css({
+		color: "#c3c3c3",
+		background: "black",
+		border: "solid 1px",
 	});
 
 	//コードテスト
@@ -266,7 +444,7 @@
 		color: "white",
 		background: "black",
 	});
-	
+
 	// Home
 	$(
 		"div.f-flex.f-flex_mg5.f-flex_mg0_s.f-flex_mb5_s div.f-flex4.f-flex12_s"
@@ -331,7 +509,7 @@
 	});
 
 	$(".a-btn_arrow").css({
-		"cssText":$(".a-btn_arrow").attr("style") + "color: #c3c3c3 !important;"
+		"cssText": $(".a-btn_arrow").attr("style") + "color: #c3c3c3 !important;"
 	});
 
 	//PAST
@@ -355,167 +533,12 @@
 
 	// 監視
 	if (document.URL.match("/standings")) {
-		const loadElem = document.getElementById("vue-standings").getElementsByClassName("loading-show")[0];
-		const loadOptions = { attributes: true };
-		const loadObserver = new MutationObserver(() => {
-			if (!!document.getElementById("standings-tbody")) {
-				rankingTableUpdate();
-
-				const standElem = document.getElementById("standings-tbody");
-				const standElemOption = {
-					childList: true,
-					attributes: true,
-				};
-				if (standElem) {
-					const standObserver = new MutationObserver(rankingTableUpdate);
-					standObserver.observe(standElem, standElemOption);
-				}
-
-				const refreshElem = document.getElementById("refresh");
-				const refreshElemOptions = {
-					attributes: true,
-					attributeFilter: ["class"],
-				};
-				if (refreshElem) {
-					const refreshObserver = new MutationObserver((mutationRecord) => {
-						const isDisabled = mutationRecord[0].target.classList.contains("disabled");
-						if (isDisabled) {
-							rankingTableUpdate();
-						}
-					}).observe(refreshElem, refreshElemOptions);
-				};
-			}
-		});
-		loadObserver.observe(loadElem, loadOptions);
+		loadObservation();
 	}
 
 	if (document.URL.match("/results")) {
-		const resultElem = document.getElementsByClassName("pagination pagination-sm mt-0 mb-1")[0]
-		const resultOptions = {
-			childList: true,
-			attributes: true
-		};
-		const resultObserver = new MutationObserver(rankingTableUpdate).observe(resultElem, resultOptions);
+		resultObservation();
 	}
 })();
 
-// 順位表などの設定
-function rankingTableUpdate() {
-	$("#btn-reset").css({
-		color: "#c3c3c3",
-		background: "black",
-	});
-
-	$("#input-affiliation").css({
-		color: "#c3c3c3",
-		background: "black",
-	});
-
-	$("#input-user").css({
-		color: "#c3c3c3",
-		background: "black",
-	});
-
-	$("#select2-standings-select-country-container").css({
-		color: "#c3c3c3",
-		background: "black",
-		border: "white 1px solid"
-	});
-
-	$("#refresh, #auto-refresh").css({
-		color: "#c3c3c3",
-		background: "black",
-	});
-
-	$("#standings-panel-heading.panel-heading").css({
-		color: "#c3c3c3",
-		background: "black",
-	});
-
-	$(".btn-text").css({
-		color: "#c3c3c3",
-	});
-
-	$("tr").css({
-		color: "#c3c3c3",
-		background: "black",
-	});
-
-	$("tr.info td").css({
-		color: "#c3c3c3",
-		background: "black",
-	});
-
-	$(".standings-score").css({
-		color: "#4aabff",
-	});
-
-	$(".pagination.pagination-sm.mt-0.mb-1 a").css({
-		color: "#c3c3c3",
-		background: "black",
-		"border-color": "",
-	});
-
-	$("li.active a").css({
-		"border-color": "#d10000",
-	});
-
-	$("td.standings-result.standings-perf").css({
-		color: "#c3c3c3",
-		background: "black",
-	});
-
-	$("td.standings-result.standings-rate").css({
-		color: "#c3c3c3",
-		background: "black",
-	});
-
-	$(".standings-ac").css({
-		color: "#00e152",
-	});
-
-	$(".standings-result p").css({
-		color: "#d8d8d8",
-	});
-
-	$(".standings-statistics td p,.standings-fa td p").css({
-		color: "#d8d8d8",
-	});
-
-	$(".sort-th.no-break a").css({
-		color: "#d6d6d6",
-	});
-
-}
-
-// userのカラー設定
-function userColor() {
-	$("head").append(
-		"<style type='text/css'> .user-blue {color: #0095ff; } </style>"
-	);
-
-	$("head").append(
-		"<style type='text/css'> .user-unrated {color: white; } </style>"
-	);
-
-	$("head").append(
-		"<style type='text/css'> .user-brown {color: #b16c28; } </style>"
-	);
-
-	$("head").append(
-		"<style type='text/css'> .user-green {color: #00ce00; } </style>"
-	);
-
-	$("head").append(
-		"<style type='text/css'> .user-gray {color: #a9a9a9; } </style>"
-	);
-
-	$("head").append(
-		"<style type='text/css'> .user-yellow {color: #dede01; } </style>"
-	);
-
-	$("head").append(
-		"<style type='text/css'> .user-cyan {color: #00f1f1; } </style>"
-	);
-}
 
