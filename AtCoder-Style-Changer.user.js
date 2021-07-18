@@ -191,6 +191,41 @@
 		border: "white solid 1px",
 	});
 
+	/**
+	 * コード画面
+	 */
+	$(".CodeMirror-scroll").css({
+		"background-color": "black",
+	});
+
+	// カーソル
+	$("head").append(
+		"<style type='text/css'>.CodeMirror-cursor{border-left: 1px solid white;border-right: none;width: 0;}</style>"
+	);
+
+	// 文字色
+	$("head").append("<style type='text/css'>.cm-s-default .cm-builtin{color: #bb98ff}</style>");
+	
+	$("head").append("<style type='text/css'>.cm-s-default .cm-keyword{color: #ed72ff}</style>");
+
+	$("head").append("<style type='text/css'>.cm-s-default .cm-def{color: #23c2ff}</style>");
+	
+	$("head").append("<style type='text/css'>.cm-s-default .cm-string{color: #ff9a5f}</style>");
+	
+	$("head").append("<style type='text/css'>.cm-s-default .cm-number{color: #11cb81}</style>");
+
+	$("head").append("<style type='text/css'>.cm-s-default .cm-comment{color: #9e9e9e}</style>");
+
+	$(".CodeMirror-gutter").css({
+		color: "white",
+		"background-color": "black",
+	});
+
+	$("head").append("<style type='text/css'>div.CodeMirror-linenumber.CodeMirror-gutter-elt{color: white}</style>");
+	
+	$(".CodeMirror").css("color","white");
+
+
 	//提出結果
 	$(".panel-heading").css({
 		color: "#c3c3c3",
