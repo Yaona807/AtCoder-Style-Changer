@@ -187,7 +187,7 @@
 
 	$("code:not([class])").css({
 		color: "#ffaa2a",
-		"background-color": "black",
+		"background-color": "transparent",
 		border: "white solid 1px",
 	});
 
@@ -401,6 +401,32 @@
 
 // 順位表などの設定
 function rankingTableUpdate() {
+	$("#btn-reset").css({
+		color: "#c3c3c3",
+		background: "black",
+	});
+
+	$("#input-affiliation").css({
+		color: "#c3c3c3",
+		background: "black",
+	});
+
+	$("#input-user").css({
+		color: "#c3c3c3",
+		background: "black",
+	});
+
+	$("#select2-standings-select-country-container").css({
+		color: "#c3c3c3",
+		background: "black",
+		border: "white 1px solid"
+	});
+
+	$("#refresh, #auto-refresh").css({
+		color: "#c3c3c3",
+		background: "black",
+	});
+
 	$("#standings-panel-heading.panel-heading").css({
 		color: "#c3c3c3",
 		background: "black",
