@@ -225,7 +225,6 @@
 	
 	$(".CodeMirror").css("color","white");
 
-
 	//提出結果
 	$(".panel-heading").css({
 		color: "#c3c3c3",
@@ -253,7 +252,21 @@
 		"<style type='text/css'>.btn-primary{color:#c3c3c3 !important; background-color: black !important; border-color: #d10000 !important;}</style>"
 	);
 
+	$("textarea#input.form-control.customtest-textarea").css({
+		color: "white",
+		background: "black",
+	});
 
+	$("textarea#stdout.form-control.customtest-textarea").css({
+		color: "white",
+		background: "black",
+	});
+
+	$("textarea#stderr.form-control.customtest-textarea").css({
+		color: "white",
+		background: "black",
+	});
+	
 	// Home
 	$(
 		"div.f-flex.f-flex_mg5.f-flex_mg0_s.f-flex_mb5_s div.f-flex4.f-flex12_s"
