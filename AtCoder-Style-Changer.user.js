@@ -362,6 +362,11 @@
 		"background-color": "transparent",
 		border: "white solid 1px",
 	});
+	$(".alert.alert-warning.alert-dismissible.fade.in").css({
+		color: "#ffbe2b",
+		"background-color": "black",
+		border: "#ffdd38 solid 1px",
+	});
 
 	/**
 	 * コード画面
@@ -446,9 +451,7 @@
 	});
 
 	// Home
-	$(
-		"div.f-flex.f-flex_mg5.f-flex_mg0_s.f-flex_mb5_s div.f-flex4.f-flex12_s"
-	).css({
+	$("div.f-flex.f-flex_mg5.f-flex_mg0_s.f-flex_mb5_s div.f-flex4.f-flex12_s").css({
 		border: "solid 1px",
 	});
 
@@ -497,6 +500,10 @@
 
 	$(".status.status-gray").css({
 		"background-color": "#717171",
+	});
+
+	$(".status.status-green").css({
+		"background-color": "#317f01",
 	});
 
 	$(".a-btn_bg").css({
