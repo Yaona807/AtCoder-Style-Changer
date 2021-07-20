@@ -7,10 +7,10 @@
 // @license      MIT
 // @match        https://atcoder.jp/*
 // @require      https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js
+// @require	 https://code.createjs.com/1.0.0/createjs.min.js
 // ==/UserScript==
 
 (function () {
-
 	// 順位表などの設定
 	function rankingTableUpdate() {
 		$("#btn-reset").css({
@@ -127,7 +127,7 @@
 			"<style type='text/css'> .user-cyan {color: #00f1f1; } </style>"
 		);
 	}
-
+	// 監視
 	function loadObservation() {
 		const loadElem = document.getElementById("vue-standings").getElementsByClassName("loading-show")[0];
 		const loadOptions = { attributes: true };
@@ -176,6 +176,7 @@
 		};
 		const resultObserver = new MutationObserver(rankingTableUpdate).observe(resultElem, resultOptions);
 	}
+
 	//全体共通
 	$("li.active a").css({
 		"border-color": "#d10000",
@@ -261,16 +262,6 @@
 
 	$(".text-center.odd").css({
 		"background-color": "black",
-	});
-
-	$("#ratingStatus").css({
-		"background-color": "rgb(209 209 209)",
-		"margin-left": "2%",
-	});
-
-	$("#rankStatus").css({
-		"background-color": "rgb(209 209 209)",
-		"margin-left": "2%",
 	});
 
 	$("a").css({
@@ -368,9 +359,7 @@
 		border: "#ffdd38 solid 1px",
 	});
 
-	/**
-	 * コード画面
-	 */
+	/* コード画面*/
 	$(".CodeMirror-scroll").css({
 		"background-color": "black",
 	});
@@ -545,6 +534,18 @@
 
 	if (document.URL.match("/results")) {
 		resultObservation();
+	}
+
+	// 色変えコードの埋め込み
+	const locationPathName = location.pathname
+	const correctLocation = location.pathname.match(/\/users\/[A-Za-z0-9]*/)
+	if (locationPathName == correctLocation && (location.search == "" || location.search == "?graph=rank" || location.search == "?graph=rating")) {
+		$("head").append(
+			'<script>function pixelDataChange(e){var k=document.getElementById("ratingStatus");if(!k){k=document.getElementById("rankStatus")}const d=k;const a=d.getContext("2d");const h=a.getImageData(0,0,d.width,d.height);const f=h.data;const g=[[128,128,128],[128,64,0],[0,128,0],[0,192,192],[0,0,255],[192,192,0],[255,128,0],[255,0,0]];const b=[[201,201,201],[168,85,2],[2,186,2],[0,192,192],[18,18,176],[192,192,0],[255,128,0],[255,0,0]];let result=b.length;for(let i=0,len=f.length;i<len;i+=4){for(let j=0;j<g.length;j+=1){if(f[i]==g[j][0]&&f[i+1]==g[j][1]&&f[i+2]==g[j][2]){result=j;break}}if(result<b.length){f[i]=b[result][0];f[i+1]=b[result][1];f[i+2]=b[result][2]}else{f[i]=255;f[i+1]=255;f[i+2]=255}}h.data=f;a.putImageData(h,0,0)};</script>'
+		);
+		$(".mt-2.mb-2").append(
+			'<script>window.onload=function(){createjs.Ticker.addEventListener("tick", pixelDataChange);};</script>'
+		);
 	}
 })();
 
