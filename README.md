@@ -14,7 +14,7 @@ AtCoderのページをダークテーマに変更するユーザスクリプト�
 ## 適用した画面
 
 ### プロフィール画面
-![image](https://user-images.githubusercontent.com/72598968/126025260-86fd8ec8-8728-407c-8d65-d31af37bfff4.png)
+![image](https://user-images.githubusercontent.com/72598968/126410883-73d4c517-80bf-4603-be60-a63a2ded1f5d.png)
 
 ### コンテスト画面
 ![image](https://user-images.githubusercontent.com/72598968/126025273-5db97765-0651-4633-bf6e-9d77b3352308.png)
@@ -27,6 +27,9 @@ AtCoderのページをダークテーマに変更するユーザスクリプト�
 
 ### 順位表
 ![image](https://user-images.githubusercontent.com/72598968/126025328-bc635209-9044-4a4b-b724-1e125313757d.png)
+
+### コードテスト
+![image](https://user-images.githubusercontent.com/72598968/126411069-01a9470e-5c69-4032-abe6-708ff23a3982.png)
 
 ### ホーム画面1
 ![image](https://user-images.githubusercontent.com/72598968/126025368-69225634-42aa-4e33-9002-f3e5f4d01b84.png)
