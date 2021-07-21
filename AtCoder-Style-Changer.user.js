@@ -538,10 +538,10 @@
 
 	// 色変えコードの埋め込み
 	const locationPathName = location.pathname
-	const correctLocation = location.pathname.match(/\/users\/[A-Za-z0-9]*/)
+	const correctLocation = location.pathname.match(/\/users\/[A-Za-z0-9_]*/)
 	if (locationPathName == correctLocation && (location.search == "" || location.search == "?graph=rank" || location.search == "?graph=rating")) {
 		$("head").append(
-			'<script>function pixelDataChange(e){var k=document.getElementById("ratingStatus");if(!k){k=document.getElementById("rankStatus")}const d=k;const a=d.getContext("2d");const h=a.getImageData(0,0,d.width,d.height);const f=h.data;const g=[[128,128,128],[128,64,0],[0,128,0],[0,192,192],[0,0,255],[192,192,0],[255,128,0],[255,0,0]];const b=[[201,201,201],[168,85,2],[2,186,2],[0,192,192],[18,18,176],[192,192,0],[255,128,0],[255,0,0]];let result=b.length;for(let i=0,len=f.length;i<len;i+=4){for(let j=0;j<g.length;j+=1){if(f[i]==g[j][0]&&f[i+1]==g[j][1]&&f[i+2]==g[j][2]){result=j;break}}if(result<b.length){f[i]=b[result][0];f[i+1]=b[result][1];f[i+2]=b[result][2]}else{f[i]=255;f[i+1]=255;f[i+2]=255}}h.data=f;a.putImageData(h,0,0)};</script>'
+			'<script>function pixelDataChange(e){var k=document.getElementById("ratingStatus");if(!k){k=document.getElementById("rankStatus")}const d=k;const a=d.getContext("2d");const h=a.getImageData(0,0,d.width,d.height);const f=h.data;const g=[[128,128,128],[128,64,0],[0,128,0],[0,192,192],[0,0,255],[192,192,0],[255,128,0],[255,0,0],[226,83,14],[192,192,192],[254,195,11],[132,230,255]];const b=[[201,201,201],[168,85,2],[2,186,2],[0,192,192],[24,148,255],[192,192,0],[255,128,0],[255,0,0],[226,83,14],[192,192,192],[254,195,11],[132,230,255]];let result=b.length;let jPlus=0;if(location.search=="?graph=rank"||!!document.getElementById("rankStatus")){jPlus=8}for(let i=0,len=f.length;i<len;i+=4){for(let j=jPlus;j<g.length;j+=1){if(f[i]==g[j][0]&&f[i+1]==g[j][1]&&f[i+2]==g[j][2]){result=j;break}}if(result<b.length){f[i]=b[result][0];f[i+1]=b[result][1];f[i+2]=b[result][2]}else{f[i]=255;f[i+1]=255;f[i+2]=255}}h.data=f;a.putImageData(h,0,0)};</script>'
 		);
 		$(".mt-2.mb-2").append(
 			'<script>window.onload=function(){createjs.Ticker.addEventListener("tick", pixelDataChange);};</script>'
