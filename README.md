@@ -1,5 +1,7 @@
 # AtCoder-Style-Changer
 
+[![GreasyFork](https://img.shields.io/badge/GreasyFork-install-blue)](https://greasyfork.org/ja/scripts/429929-atcoder-style-changer)
+
 ## 概要
 
 AtCoderのページをダークテーマに変更するユーザスクリプトです。
@@ -7,9 +9,6 @@ AtCoderのページをダークテーマに変更するユーザスクリプト�
 所々、バグがあるかも知れません。
 
 利用する際は自己責任でお願いいたします。
-
-## インストール
-[`install`](https://github.com/i-708/AtCoder-Style-Changer/raw/master/AtCoder-Style-Changer.user.js) <- こちらからインストール可能です。
 
 ## 適用した画面
 
