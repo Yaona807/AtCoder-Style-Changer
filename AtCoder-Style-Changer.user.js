@@ -1,13 +1,11 @@
 // ==UserScript==
 // @name         AtCoder-Style-Changer
 // @namespace    http://github.com/i-708
-// @version      0.1
+// @version      1.1.0
 // @description  AtCoderのテーマをダークテーマに変更します
 // @author       i-708
 // @license      MIT
 // @match        https://atcoder.jp/*
-// @require      https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js
-// @require      https://code.createjs.com/1.0.0/createjs.min.js
 // ==/UserScript==
 
 (function () {
@@ -32,7 +30,7 @@
 		$("#select2-standings-select-country-container").css({
 			color: baseColor,
 			background: bgColor,
-			border: "white 1px solid"
+			border: "white 1px solid",
 		});
 
 		$("#refresh, #auto-refresh").css({
@@ -98,7 +96,6 @@
 		$(".sort-th.no-break a").css({
 			color: "#d6d6d6",
 		});
-
 	}
 
 	// userのカラー設定
@@ -133,14 +130,16 @@
 	}
 	// 監視
 	function loadObservation() {
-		const loadElem = document.getElementById("vue-standings").getElementsByClassName("loading-show")[0];
+		const loadElem = document
+			.getElementById("vue-standings")
+			.getElementsByClassName("loading-show")[0];
 		const loadOptions = { attributes: true };
 		const loadObserver = new MutationObserver(() => {
 			if (!!document.getElementById("standings-tbody")) {
 				rankingTableUpdate();
 				standObservation();
-				refreshObservation()
-			};
+				refreshObservation();
+			}
 		});
 		loadObserver.observe(loadElem, loadOptions);
 	}
@@ -165,28 +164,34 @@
 		};
 		if (refreshElem) {
 			const refreshObserver = new MutationObserver((mutationRecord) => {
-				const isDisabled = mutationRecord[0].target.classList.contains("disabled");
+				const isDisabled =
+					mutationRecord[0].target.classList.contains("disabled");
 				if (isDisabled) {
 					rankingTableUpdate();
 				}
 			}).observe(refreshElem, refreshElemOptions);
-		};
+		}
 	}
 	function resultObservation() {
-		const resultElem = document.getElementsByClassName("pagination pagination-sm mt-0 mb-1")[0]
+		const resultElem = document.getElementsByTagName("tbody")[0];
 		const resultOptions = {
 			childList: true,
-			attributes: true
+			attributes: true,
+			subtree: true,
 		};
-		const resultObserver = new MutationObserver(rankingTableUpdate).observe(resultElem, resultOptions);
+		if (resultElem) {
+			const resultObserver = new MutationObserver(rankingTableUpdate).observe(
+				resultElem,
+				resultOptions
+			);
+		}
 	}
 
 	function init() {
-
 		//全体共通
-		$("li.active a").not('ul.dropdown-menu li a').css({
+		$("li.active a").not("ul.dropdown-menu li a").css({
 			"border-color": borderColor,
-			"border": " #d10000 solid 1px"
+			border: " #d10000 solid 1px",
 		});
 
 		$(".btn-primary").css({
@@ -237,7 +242,9 @@
 			"<style type='text/css'> .new-is-active {color: '#c3c3c3'; } </style>"
 		);
 
-		$(".glyphicon.glyphicon-resize-full, .glyphicon.glyphicon-search.black").css({
+		$(
+			".glyphicon.glyphicon-resize-full, .glyphicon.glyphicon-search.black"
+		).css({
 			color: baseColor,
 		});
 
@@ -376,24 +383,38 @@
 		);
 
 		// 文字色
-		$("head").append("<style type='text/css'>.cm-s-default .cm-builtin{color: #bb98ff}</style>");
+		$("head").append(
+			"<style type='text/css'>.cm-s-default .cm-builtin{color: #bb98ff}</style>"
+		);
 
-		$("head").append("<style type='text/css'>.cm-s-default .cm-keyword{color: #ed72ff}</style>");
+		$("head").append(
+			"<style type='text/css'>.cm-s-default .cm-keyword{color: #ed72ff}</style>"
+		);
 
-		$("head").append("<style type='text/css'>.cm-s-default .cm-def{color: #23c2ff}</style>");
+		$("head").append(
+			"<style type='text/css'>.cm-s-default .cm-def{color: #23c2ff}</style>"
+		);
 
-		$("head").append("<style type='text/css'>.cm-s-default .cm-string{color: #ff9a5f}</style>");
+		$("head").append(
+			"<style type='text/css'>.cm-s-default .cm-string{color: #ff9a5f}</style>"
+		);
 
-		$("head").append("<style type='text/css'>.cm-s-default .cm-number{color: #11cb81}</style>");
+		$("head").append(
+			"<style type='text/css'>.cm-s-default .cm-number{color: #11cb81}</style>"
+		);
 
-		$("head").append("<style type='text/css'>.cm-s-default .cm-comment{color: #9e9e9e}</style>");
+		$("head").append(
+			"<style type='text/css'>.cm-s-default .cm-comment{color: #9e9e9e}</style>"
+		);
 
 		$(".CodeMirror-gutter").css({
 			color: "white",
 			"background-color": bgColor,
 		});
 
-		$("head").append("<style type='text/css'>div.CodeMirror-linenumber.CodeMirror-gutter-elt{color: white}</style>");
+		$("head").append(
+			"<style type='text/css'>div.CodeMirror-linenumber.CodeMirror-gutter-elt{color: white}</style>"
+		);
 
 		$(".CodeMirror").css("color", "white");
 
@@ -412,6 +433,25 @@
 			background: bgColor,
 			border: "solid 1px",
 		});
+
+		//コード
+		$("head").append(
+			"<style type='text/css'>ol.linenums{color: #c3c3c3; background-color: #1c1b1b;}</style>"
+		);
+		$("head").append(
+			"<style type='text/css'>ol.linenums li{background-color: black;}</style>"
+		);
+		$("head").append("<style type='text/css'>.com{color: #e11313;}</style>");
+		$("head").append("<style type='text/css'>.str{color: #1ec91e;}</style>");
+		$("head").append("<style type='text/css'>.kwd{color: #00d0ff;}</style>");
+		$("head").append("<style type='text/css'>.pln{color: #dfdfdf;}</style>");
+		$("head").append("<style type='text/css'>.pun{color: #ffe000;}</style>");
+		$("head").append("<style type='text/css'>.lit{color: #41df00;}</style>");
+
+		// セレクター
+		$("head").append(
+			"<style type='text/css'>.select2-dropdown, .select2-search__field{background-color: black !important;color: #c3c3c3 !important;}</style>"
+		);
 
 		//コードテスト
 		$("head").append(
@@ -446,7 +486,9 @@
 		});
 
 		// Home
-		$("div.f-flex.f-flex_mg5.f-flex_mg0_s.f-flex_mb5_s div.f-flex4.f-flex12_s").css({
+		$(
+			"div.f-flex.f-flex_mg5.f-flex_mg0_s.f-flex_mb5_s div.f-flex4.f-flex12_s"
+		).css({
 			border: "solid 1px",
 		});
 
@@ -511,7 +553,7 @@
 		});
 
 		$(".a-btn_arrow").css({
-			"cssText": $(".a-btn_arrow").attr("style") + "color: #c3c3c3 !important;"
+			cssText: $(".a-btn_arrow").attr("style") + "color: #c3c3c3 !important;",
 		});
 
 		//PAST
@@ -538,6 +580,12 @@
 			color: baseColor,
 			"background-color": bgColor,
 		});
+
+		//ダイアログ
+		$(".modal-content").css({
+			color: baseColor,
+			"background-color": bgColor,
+		});
 	}
 
 	init();
@@ -552,82 +600,87 @@
 	}
 
 	// 色変えコードの埋め込み
-	const locationPathName = location.pathname
-	const correctLocation = location.pathname.match(/\/users\/[A-Za-z0-9_]*/)
-	if (locationPathName == correctLocation && (location.search == "" || location.search == "?graph=rank" || location.search == "?graph=rating")) {
+	const locationPathName = location.pathname;
+	const correctLocation = location.pathname.match(/\/users\/[A-Za-z0-9_]*/);
+	if (
+		locationPathName == correctLocation &&
+		(location.search == "" ||
+			location.search == "?graph=rank" ||
+			location.search == "?graph=rating")
+	) {
 		$("head").append(
 			`<script>
-				function pixelDataChange(event) {
-					var c = document.getElementById("ratingStatus");
-					if (!c){
-						c = document.getElementById("rankStatus");
-					}
-					const canvas = c;
-					const ctx = canvas.getContext("2d");
-					const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-					const data = imageData.data;
-					const oldColor = [
-						[128,128,128],
-						[128,64,0],
-						[0,128,0],
-						[0,192,192],
-						[0,0,255],
-						[192,192,0],
-						[255,128,0],
-						[255,0,0],
-						[226,83,14],
-						[192,192,192],
-						[254,195,11],
-						[132,230,255]
-					];
-					const newColor = [
-						[201,201,201],
-						[168,85,2],
-						[2,186,2],
-						[0,192,192],
-						[24,148,255],
-						[192,192,0],
-						[255,128,0],
-						[255,0,0],
-						[226,83,14],
-						[192,192,192],
-						[254,195,11],
-						[132,230,255]
-					];
-					let result = newColor.length;
-					let jPlus = 0;
-					if (location.search == "?graph=rank" || !!document.getElementById("rankStatus")){
-						jPlus = 8;
-					}
-					for (let i = 0, len = data.length; i < len; i += 4) {
-						for (let j = jPlus; j < oldColor.length; j += 1) {
-							if (data[i] == oldColor[j][0] && data[i + 1] == oldColor[j][1] && data[i + 2] == oldColor[j][2]) {
-								result = j;
-								break;
-							}
-						}
-						if (result < newColor.length) {
-							data[i] = newColor[result][0];
-							data[i + 1] = newColor[result][1];
-							data[i + 2] = newColor[result][2];
-						}
-						else{
-							data[i] = 255;
-							data[i + 1] = 255;
-							data[i + 2] = 255;
-						}
-					}
-					imageData.data = data;
-					ctx.putImageData(imageData, 0, 0);
-				}
-			</script>`
+				    function pixelDataChange(event) {
+					    var c = document.getElementById("ratingStatus");
+					    if (!c){
+						    c = document.getElementById("rankStatus");
+					    }
+					    const canvas = c;
+					    const ctx = canvas.getContext("2d");
+					    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+					    const data = imageData.data;
+					    const oldColor = [
+						    [128,128,128],
+						    [128,64,0],
+						    [0,128,0],
+						    [0,192,192],
+						    [0,0,255],
+						    [192,192,0],
+						    [255,128,0],
+						    [255,0,0],
+						    [226,83,14],
+						    [192,192,192],
+						    [254,195,11],
+						    [132,230,255]
+					    ];
+					    const newColor = [
+						    [201,201,201],
+						    [168,85,2],
+						    [2,186,2],
+						    [0,192,192],
+						    [24,148,255],
+						    [192,192,0],
+						    [255,128,0],
+						    [255,0,0],
+						    [226,83,14],
+						    [192,192,192],
+						    [254,195,11],
+						    [132,230,255]
+					    ];
+					    let result = newColor.length;
+					    let jPlus = 0;
+					    if (location.search == "?graph=rank" || !!document.getElementById("rankStatus")){
+						    jPlus = 8;
+					    }
+					    for (let i = 0, len = data.length; i < len; i += 4) {
+						    for (let j = jPlus; j < oldColor.length; j += 1) {
+							    if (data[i] == oldColor[j][0] && data[i + 1] == oldColor[j][1] && data[i + 2] == oldColor[j][2]) {
+								    result = j;
+								    break;
+							    }
+						    }
+						    if (result < newColor.length) {
+							    data[i] = newColor[result][0];
+							    data[i + 1] = newColor[result][1];
+							    data[i + 2] = newColor[result][2];
+						    }
+						    else{
+							    data[i] = 255;
+							    data[i + 1] = 255;
+							    data[i + 2] = 255;
+						    }
+					    }
+					    imageData.data = data;
+					    ctx.putImageData(imageData, 0, 0);
+				    }
+			    </script>`
 		);
 		$(".mt-2.mb-2").append(
 			`<script>
-				window.onload = function(){
-					createjs.Ticker.addEventListener("tick", pixelDataChange);
-				};
-				</script>`
+				    window.onload = function(){
+					    createjs.Ticker.addEventListener("tick", pixelDataChange);
+				    };
+			</script>`
 		);
 	}
 })();
