@@ -361,11 +361,12 @@
 			background: bgColor,
 		});
 
-		$("code:not([class])").css({
+		$("p code").css({
 			color: "#ffaa2a",
 			"background-color": "transparent",
 			border: "white solid 1px",
 		});
+
 		$(".alert.alert-warning.alert-dismissible.fade.in").css({
 			color: "#ffbe2b",
 			"background-color": bgColor,
@@ -447,7 +448,8 @@
 		$("head").append("<style type='text/css'>.pln{color: #dfdfdf;}</style>");
 		$("head").append("<style type='text/css'>.pun{color: #ffe000;}</style>");
 		$("head").append("<style type='text/css'>.lit{color: #41df00;}</style>");
-
+		$("head").append("<style type='text/css'>.typ{color: #da01da;}</style>");
+		
 		// セレクター
 		$("head").append(
 			"<style type='text/css'>.select2-dropdown, .select2-search__field{background-color: black !important;color: #c3c3c3 !important;}</style>"
@@ -586,6 +588,13 @@
 			color: baseColor,
 			"background-color": bgColor,
 		});
+
+		$("html body").css({
+			"background-color": bgColor,
+			color: baseColor,
+		});
+
+		$("html body").css("cssText", "color:#c3c3c3;background-image: none !important;background-color: black !important;");
 	}
 
 	init();
